@@ -14,11 +14,14 @@ async function main() {
     const data = await fs.readFile("sitemapproducts.xml");
     const result = await parseStringPromise(data);
     const links = result.urlset.url.map((url) => url.loc[0]);
-    console.log("Links have recieved");
+    console.log("Links have been recieved");
 
     // Get parse data
     for (const element of links) {
-      const res = await client.scrape(element);
+      const res = await client.scrape(element, {
+        proxy_type: "residential",
+        proxy_country: "US",
+      });
       const $ = cheerio.load(res.content);
       $(
         'script[type="application/json"][data-hypernova-key="pdp_app_page"]'
