@@ -19,7 +19,7 @@ for url in root.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}url'):
 
 
 max_attempts = 3  # Number of attempts
-max_iterations = 5  # Number of iteration (for testing)
+max_iterations = 50000  # Number of iteration (for testing)
 
 for i, link in enumerate(links):
     if i >= max_iterations:
@@ -27,7 +27,8 @@ for i, link in enumerate(links):
     attempts = 0  # Count attempts
     while attempts < max_attempts:
         try:
-            response = client.general_request(link)
+            cache_url = 'https://webcache.googleusercontent.com/search?q=cache:'+link
+            response = client.general_request(cache_url)
             if response.status_code == 200:
                 break  # If server -> success
         except ScrapingantInvalidInputException as e:

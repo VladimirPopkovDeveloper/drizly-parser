@@ -9,7 +9,7 @@ async function main() {
     const data = await fs.readFile("sitemapproducts.xml");
     const result = await parseStringPromise(data);
     const links = result.urlset.url.map((url) => url.loc[0]);
-    console.log("Links have received");
+    console.log("Links were received");
 
     // Get parse data
     for (const element of links) {
