@@ -1,4 +1,4 @@
-# Using ScrapingAntClient Libs
+# Using ScrapingAntClient Libs (too slow...)
 import xml.etree.ElementTree as ET
 from scrapingant_client import ScrapingAntClient, ScrapingantClientException, ScrapingantInvalidInputException
 from bs4 import BeautifulSoup

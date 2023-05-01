@@ -1,3 +1,4 @@
+// Using Puppeteer (has some prospects!)
 const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 
@@ -18,12 +19,13 @@ const getBooksData = async () => {
   // Finding the element containing JSON data using Cheerio
   const hypernovaData = await page.evaluate(() => {
     const $ = window.$ || window.jQuery;
-    const scriptData = $(
+    return (scriptData = $(
       'script[type="application/json"][data-hypernova-key="pdp_app_page"]'
-    ).html();
-    console.log(scriptData);
+    )
+      .html() // Get content of script tag
+      .replace(/<!--|-->/g, "")); // Remove comment markup
   });
-
+  console.log(hypernovaData);
   await browser.close();
 };
 

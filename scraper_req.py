@@ -1,4 +1,4 @@
-# Using Standard requests.get
+# Using Standard requests + scraping from Google cashe (might be blocked, but has some prospects)
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 import requests

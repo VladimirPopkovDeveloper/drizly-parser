@@ -1,4 +1,4 @@
-// Using ScrapingAntClient Libs
+// Using ScrapingAntClient Libs (too slow...)
 const ScrapingAntClient = require("@scrapingant/scrapingant-client");
 const cheerio = require("cheerio");
 const fs = require("fs").promises;
