@@ -19,7 +19,7 @@ for url in root.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}url'):
 
 
 max_attempts = 3  # Number of attempts
-max_iterations = 50000  # Number of iteration (for testing)
+max_iterations = 30  # Number of iteration (for testing)
 
 for i, link in enumerate(links):
     if i >= max_iterations:
