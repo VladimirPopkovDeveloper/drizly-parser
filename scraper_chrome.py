@@ -1,5 +1,6 @@
 # Using Chrone WebDriver (has problem with user profile, need fixes)
 import xml.etree.ElementTree as ET
+import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -29,7 +30,7 @@ options.add_argument('--no-sandbox')
 
 driver = webdriver.Chrome(options=options)
 
-max_iterations = 50  # Number of iteration (for testing)
+max_iterations = 3  # Number of iteration (for testing)
 
 for i, link in enumerate(links):
     if i >= max_iterations:
@@ -82,6 +83,9 @@ for i, link in enumerate(links):
     # Вывод содержимого
     with open('scripts.json', 'a', encoding="utf-8") as f:
         f.write(script_content + '\n')
+    with open('parser_log.txt', 'a', encoding="utf-8") as f:
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        f.write(f'{i} - {timestamp} - {link} \n')
     print(f'Ссылка {link} добавлена в файл scripts.json')
 
 # Закрытие браузера
