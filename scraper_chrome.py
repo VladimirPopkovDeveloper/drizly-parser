@@ -4,8 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
-
 
 # Get sitemap
 sitemap_path = "sitemapproducts.xml"
@@ -24,13 +22,14 @@ print(f"Ссылки из sitemapproducts.xml загружены")
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
 options.add_argument("--disable-blink-features=AutomationControlled")  # Опция для уменьшения вероятности появления защиты CloudFlare
-
+options.add_argument("--disable-extensions")
+options.add_argument('--no-sandbox')
 #options.add_argument('--user-data-dir=C:\\Users\\dj-ve\\AppData\\Local\\Google\\Chrome\\User Data')
 #options.add_argument('--profile-directory=Default')
 
 driver = webdriver.Chrome(options=options)
 
-max_iterations = 30  # Number of iteration (for testing)
+max_iterations = 50  # Number of iteration (for testing)
 
 for i, link in enumerate(links):
     if i >= max_iterations:
@@ -77,15 +76,13 @@ for i, link in enumerate(links):
     # Получение содержимого элемента
     try:
         script_content = driver.find_element("css selector", 'script[type="application/json"][data-hypernova-key="pdp_app_page"]').get_attribute('innerHTML').replace("<!--", "").replace("-->", "")
-    except NoSuchElementException as exception:
-        with open('badlinks.txt', 'a', encoding="utf-8") as f:
-            f.write(link + '\n')
-        print(f"Элемент не найден. Необработанная ссылка добавлена в badlinks.txt")
+    except:
+        pass
 
     # Вывод содержимого
     with open('scripts.json', 'a', encoding="utf-8") as f:
         f.write(script_content + '\n')
-    print(f'Ссылка № {link.index(link)} {link} добавлена в файл scripts.json')
+    print(f'Ссылка {link} добавлена в файл scripts.json')
 
 # Закрытие браузера
 driver.quit()
