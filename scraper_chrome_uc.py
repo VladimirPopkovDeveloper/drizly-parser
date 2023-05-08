@@ -26,10 +26,11 @@ options.add_argument("--start-maximized")
 
 driver = uc.Chrome(options=options)
 
-max_iterations = 5000  # Number of iteration (for testing)
+start_element = 3000 # Start from this element in Link array
+end_element = 5000  # Finish on this element in Link array
 
-for i, link in enumerate(links[3000:], 3000):
-    if i >= max_iterations:
+for i, link in enumerate(links[start_element:], start_element): # Start from this element in Link array
+    if i >= end_element: # Proceed by end element
         break  # Check iteration
     print(f"Открываем ссылку №: {i+1}")
     # Переход на страницу
