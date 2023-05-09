@@ -26,8 +26,8 @@ options.add_argument("--start-maximized")
 
 driver = uc.Chrome(options=options)
 
-start_element = 3000 # Start from this element in Link array
-end_element = 5000  # Finish on this element in Link array
+start_element = 30000 # Start from this element in Link array
+end_element = 50000  # Finish on this element in Link array
 
 for i, link in enumerate(links[start_element:], start_element): # Start from this element in Link array
     if i >= end_element: # Proceed by end element
@@ -45,12 +45,12 @@ for i, link in enumerate(links[start_element:], start_element): # Start from thi
             f.write(f'{i} - {timestamp} - не добавлена - {link} \n')
 
     # Вывод содержимого
-    with open('scripts.json', 'a', encoding="utf-8") as f:
+    with open('scripts3.json', 'a', encoding="utf-8") as f:
         f.write(script_content + '\n')
-    with open('parser_log.txt', 'a', encoding="utf-8") as f:
+    with open('parser_log3.txt', 'a', encoding="utf-8") as f:
         timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         f.write(f'{i} - {timestamp} - {link} \n')
-    print(f'Ссылка {link} добавлена в файл scripts.json')
+    print(f'Ссылка {link} добавлена в файл scripts3.json')
     time.sleep(random.randint(2, 10)) # Wait some random time
 
 # Закрытие браузера
